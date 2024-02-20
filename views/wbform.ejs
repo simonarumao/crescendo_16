@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whistleblower Reporting Form</title>
+    <link rel="stylesheet" href="../public/company/css/whistleblower.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Whistleblower Reporting Form</h1>
+        <form id="whistleblowerForm" action="/submit" method="post">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="report">Report Details:</label>
+            <textarea id="report" name="report" rows="4" required></textarea><br>
+
+            <button type="submit">Submit Report</button>
+        </form>
+    </div>
+</body>
+</html>
+
