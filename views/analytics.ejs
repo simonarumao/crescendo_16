@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+<title>Data Visualization</title>
+<link rel="stylesheet" href="company/css/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.css">
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<section id="sidebar">
+	<a href="#" class="brand">
+		<i class='bx bxs-heart-square'></i>
+		<span class="text">Tasty-Crisps</span>
+	</a>
+	<ul class="side-menu top">
+		<li >
+			<a href="/admin">
+				<i class='bx bxs-dashboard' ></i>
+				<span class="text">Dashboard</span>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<i class='bx bxs-shopping-bag-alt' ></i>
+				<span class="text">My Store</span>
+			</a>
+		</li>
+		<li class="active">
+			<a href="/analytics">
+				<i class='bx bxs-doughnut-chart' ></i>
+				<span class="text">Analytics</span>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<i class='bx bxs-check-shield' ></i>
+				<span class="text">Go to Lab</span>
+			</a>
+		</li>
+		
+	</ul>
+</section>
+<section id="content">
+	<!-- NAVBAR -->
+	<nav>
+		<i class='bx bx-menu' ></i>
+		<a href="#" class="nav-link">Categories</a>
+		<form action="#">
+			<div class="form-input">
+				<input type="search" placeholder="Search...">
+				<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+			</div>
+		</form>
+		
+		<a href="#" class="notification">
+			<i class='bx bxs-bell' ></i>
+			<span class="num">8</span>
+		</a>
+		<a href="#" class="profile">
+			<img src="img/people.png">
+		</a>
+	</nav>
+<main>
+	<div class="head-title">
+		<div class="left">
+			<h1>Analytics</h1>
+			<ul class="breadcrumb">
+				<li>
+					<a href="#">Dashboard</a>
+				</li>
+				<li><i class='bx bx-chevron-right' ></i></li>
+				<li>
+					<a class="active" href="#">Home</a>
+				</li>
+			</ul>
+		</div>
+		<a href="#" class="btn-download">
+			<i class='bx bxs-cloud-download' ></i>
+			<span class="text">Download PDF</span>
+		</a>
+	</div>
+	</main>
+
+
+
+
+<div class="container">
+  <h1>Data Visualization</h1>
+  <div class="chart-container">
+    <div class="chart-box pie-chart-container">
+      <canvas id="faults-chart"></canvas>
+    </div>
+    <div class="chart-box line-chart-container">
+      <canvas id="line-chart"></canvas>
+    </div>
+  </div>
+  <button id="pdf-btn">Generate PDF</button>
+</div>
+
+<div class="container-1">
+	<h2>Market Analysis</h2>
+	<canvas id="marketAnalysisChart"></canvas>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script>
+  const menuBar = document.querySelector('#content nav .bx.bx-menu');
+const sidebar = document.getElementById('sidebar');
+
+menuBar.addEventListener('click', function () {
+	sidebar.classList.toggle('hide');
+})
+
+  // Static sample data
+	const data = [
+		{ "Ingredients deal month": "January", "faults": "Yes", "fault found": 5, "reported before lab testing": 3, "report in lab testing": 2, "resolved": 1, "sold now": 10 },
+		{ "Ingredients deal month": "February", "faults": "No", "fault found": 3, "reported before lab testing": 2, "report in lab testing": 1, "resolved": 3, "sold now": 15 },
+		{ "Ingredients deal month": "March", "faults": "Yes", "fault found": 7, "reported before lab testing": 4, "report in lab testing": 3, "resolved": 2, "sold now": 20 },
+		// Add more sample data as needed
+	  ];
+	
+	  // Process data for the pie chart
+	  const labelsPie = ['Yes', 'No'];
+	  const dataPie = [
+		data.filter(entry => entry['faults'] === 'Yes').length,
+		data.filter(entry => entry['faults'] === 'No').length
+	  ];
+	
+	  // Process data for the line chart
+	  const labelsLine = data.map(entry => entry['Ingredients deal month']);
+	  const dataFaultFound = data.map(entry => entry['fault found']);
+	  const dataReportBeforeLab = data.map(entry => entry['reported before lab testing']);
+	  const dataReportInLab = data.map(entry => entry['report in lab testing']);
+	  const dataResolved = data.map(entry => entry['resolved']);
+	
+	  // Render pie chart
+	  const pieChartCtx = document.getElementById('faults-chart').getContext('2d');
+	  const pieChart = new Chart(pieChartCtx, {
+		type: 'pie',
+		data: {
+		  labels: labelsPie,
+		  datasets: [{
+			label: 'Faults',
+			data: dataPie,
+			backgroundColor: ['#FF6384', '#36A2EB'],
+			borderWidth: 1
+		  }]
+		},
+		options: {
+		  responsive: true,
+		  maintainAspectRatio: false
+		}
+	  });
+	
+	  // Render line chart
+	  const lineChartCtx = document.getElementById('line-chart').getContext('2d');
+	  const lineChart = new Chart(lineChartCtx, {
+		type: 'line',
+		data: {
+		  labels: labelsLine,
+		  datasets: [{
+			label: 'Fault Found',
+			data: dataFaultFound,
+			borderColor: '#FF6384',
+			fill: false,
+			borderWidth: 2
+		  }, {
+			label: 'Reported Before Lab Testing',
+			data: dataReportBeforeLab,
+			borderColor: '#36A2EB',
+			fill: false,
+			borderWidth: 2
+		  }, {
+			label: 'Report in Lab Testing',
+			data: dataReportInLab,
+			borderColor: '#FFCE56',
+			fill: false,
+			borderWidth: 2
+		  }, {
+			label: 'Resolved',
+			data: dataResolved,
+			borderColor: '#4CAF50',
+			fill: false,
+			borderWidth: 2
+		  }]
+		},
+		options: {
+		  responsive: true,
+		  maintainAspectRatio: false,
+		  scales: {
+			y: {
+			  beginAtZero: true
+			}
+		  }
+		}
+	  });
+
+
+	  document.addEventListener('DOMContentLoaded', function () {
+            // Generate sample market analysis data
+            const { labels, prices } = generateMarketAnalysisData();
+
+            // Create chart
+            const ctx = document.getElementById('marketAnalysisChart').getContext('2d');
+            const marketAnalysisChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Market Prices',
+                        data: prices,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Fill color
+                        borderColor: 'rgba(54, 162, 235, 1)', // Line color
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+        // Algorithm to generate sample market analysis data
+        function generateMarketAnalysisData() {
+            const labels = []; // Labels for the x-axis (e.g., months)
+            const prices = []; // Sample market prices
+
+            // Generate sample data for 12 months
+            for (let i = 1; i <= 12; i++) {
+                labels.push(`Month ${i}`);
+                // Generate random prices between 100 and 500
+                prices.push(Math.floor(Math.random() * (500 - 100 + 1)) + 100);
+            }
+
+            return { labels, prices };
+        }
+</script>
+</body>
+</html>

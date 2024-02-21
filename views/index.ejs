@@ -1,62 +1,3 @@
-<!-- views/index.ejs
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Product</title>
-</head>
-<body>
-  <h1>Add Product</h1>
-  
-  <form id="productForm"  action="/products" method="POST">
-    <label for="productName">Product Name:</label>
-    <input type="text" id="productName" name="name" required>
-
-    <label for="description">Description:</label>
-    <textarea id="description" name="description"></textarea>
-
-    <label for="producerName">Producer Name:</label>
-    <input type="text" id="producerName" name="producerName">
-
-    <label for="productionDate">Production Date:</label>
-    <input type="date" id="productionDate" name="productionDate">
-
-    <label for="batchId">Batch ID:</label>
-    <input type="text" id="batchId" name="batchId" required>
-
-    <label for="transportationDetails">Transportation Details:</label>
-    <input type="text" id="transportationDetails" name="transportationDetails">
-
-    <label for="ingredientsList">Ingredients List (comma-separated):</label>
-    <input type="text" id="ingredientsList" name="ingredientsList">
-
-    <label for="qualityMetrics">Quality Metrics:</label>
-    <textarea id="qualityMetrics" name="qualityMetrics"></textarea>
-
-    <label for="location">Location:</label>
-    <input type="text" id="location" name="location">
-
-    <label for="harvestDate">Harvest Date:</label>
-    <input type="date" id="harvestDate" name="harvestDate">
-
-    <label for="expiryDate">Expiry Date:</label>
-    <input type="date" id="expiryDate" name="expiryDate">
-
-    <label for="storageConditions">Storage Conditions:</label>
-    <input type="text" id="storageConditions" name="storageConditions">
-
-    <label for="traceabilityInformation">Traceability Information:</label>
-    <input type="text" id="traceabilityInformation" name="traceabilityInformation">
-
-    <button type="submit">Add Product</button>
-  </form>
-
-  <script src="frontend.js"></script>
-</body>
-</html> -->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,37 +44,26 @@
             <input type="text" id="batchId"  name="batchId">
         </div>
         <div class="form-group">
-            <label for="transportationDetails">Transportation Details:</label>
-            <textarea id="transportationDetails" rows="4" name="transportationDetails"></textarea>
+            <label for="transportationDetails">Texture Evalution:</label>
+            <input type="number" id="transportationDetails" rows="4" name="textureevaluation"></input>
         </div>
         <div class="form-group">
             <label for="ingredientsList">Ingredients List:</label>
             <textarea id="ingredientsList" rows="4" name="ingredientsList"></textarea>
         </div>
         <div class="form-group">
-            <label for="qualityMetrics">Quality Metrics:</label>
-            <textarea id="qualityMetrics" rows="4"  name="qualityMetrics"></textarea>
+            <label for="qualityMetrics">Flavor Assessment:</label>
+            <input type="number" id="qualityMetrics" rows="4"  name="flavorAssessment"></input>
         </div>
         <div class="form-group">
-            <label for="location">Location:</label>
-            <input type="text" id="location"  name="location">
+            <label for="location">Oil Content:</label>
+            <input type="number" id="location"  name="oilcontent">
         </div>
         <div class="form-group">
-            <label for="harvestDate">Harvest Date:</label>
-            <input type="date" id="harvestDate" name="harvestDate">
+            <label for="harvestDate">Thickness:</label>
+            <input type="number" id="harvestDate" name="thickness">
         </div>
-        <div class="form-group">
-            <label for="expiryDate">Expiry Date:</label>
-            <input type="date" id="expiryDate" name="expiryDate">
-        </div>
-        <div class="form-group">
-            <label for="storageConditions">Storage Conditions:</label>
-            <input type="text" id="storageConditions" name="storageConditions">
-        </div>
-        <div class="form-group">
-            <label for="traceabilityInformation">Traceability Information:</label>
-            <input type="text" id="traceabilityInformation" name="traceabilityInformation">
-        </div>
+        
         <button type="submit">Submit</button>
     </form>
 </div>

@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: skyblue;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    color: black;
+}
+
+.evaluation-data {
+    margin-top: 30px;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+.evaluation-data p {
+    margin-bottom: 10px;
+}
+
+.quality-decision {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.navbar {
+    background-color: skyblue;
+    color: skyblue;
+    padding: 10px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .container img.logo {
+    width: 100px; /* Adjust the size of the logo as needed */
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+.navbar ul li a {
+    color: skyblue;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 18px;
+}

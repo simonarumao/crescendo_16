@@ -17,14 +17,14 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  transportationDetails: String,
+  textureevaluation: Number,
   ingredientsList: String,
-  qualityMetrics: String,
-  location: String,
-  harvestDate: Date,
-  expiryDate: Date,
-  storageConditions: String,
-  traceabilityInformation: String,
+  flavorAssessment: Number,
+  oilcontent: Number,
+    thickness: Number,
+  qualityDecision:String
+  
+  
 });
 
 const Product = mongoose.model('Product', productSchema);

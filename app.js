@@ -27,8 +27,15 @@ app.use(methodoverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 
 
-app.get('/', (req, res) => {
-    res.send("hello world")
+app.get('/user', (req, res) => {
+    res.render("user")
+})
+app.get('/admin', (req, res) => {
+    res.render("admin")
+})
+
+app.get('/analytics', (req, res) => {
+    res.render('analytics')
 })
 
 app.get('/addproducts', (req, res) => {
@@ -39,10 +46,14 @@ app.get('/addproducts', (req, res) => {
     try {
       const {
         name, description, producerName, productionDate,
-        batchId, transportationDetails, ingredientsList, qualityMetrics,
-        location, harvestDate, expiryDate, storageConditions,
-        traceabilityInformation
-      } = req.body;
+        batchId, textureevaluation, ingredientsList, flavorAssessment,
+        oilcontent, thickness
+        } = req.body;
+        
+        let qualityDecision = "Reject"; // Default decision
+        if (textureevaluation >= 50 &&  oilcontent <= 50 && thickness <= 50) {
+            qualityDecision = "Approve";
+        }
   
       const newProduct = new Product({
         name,
@@ -50,25 +61,47 @@ app.get('/addproducts', (req, res) => {
         producerName,
         productionDate,
         batchId,
-        transportationDetails,
+        textureevaluation,
         ingredientsList, // If ingredientsList is comma-separated
-        qualityMetrics,
-        location,
-        harvestDate,
-        expiryDate,
-        storageConditions,
-        traceabilityInformation,
+        flavorAssessment,
+        oilcontent,
+          thickness,
+        qualityDecision
       });
   
       await newProduct.save();
   
-      res.status(200).send('Product added successfully');
+      res.redirect(`/lab?productId=${newProduct._id}`)
     } catch (error) {
       console.error('Error:', error);
       res.status(500).send('Internal Server Error');
     }
   });
-  
+
+
+  app.get('/lab', async (req, res) => {
+    try {
+        const productId = req.query.productId;
+
+        // Fetch the product details from the database using the productId
+        const product = await Product.findById(productId);
+
+        // Simulate evaluation process
+        const { textureevaluation, flavorAssessment, oilcontent, thickness } = product;
+
+        // Render the results page with the evaluation metrics
+        res.render('labResults', {
+            textureevaluation,
+            flavorAssessment,
+            oilcontent,
+            thickness
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 // app.get('/whistleblower', (req, res) => {
 //     res.render('wbform');

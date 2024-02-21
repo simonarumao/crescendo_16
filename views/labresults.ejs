@@ -1,0 +1,58 @@
+<!-- labResults.ejs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Results</title>
+</head>
+<body>
+    <h1>Lab Results</h1>
+    <p><strong>Texture Evaluation:</strong> <%= textureevaluation.toFixed(2) %>%</p>
+    <p><strong>Flavor Assessment:</strong> <%= flavorAssessment.toFixed(2) %>%</p>
+    <p><strong>Oil Content:</strong> <%= oilcontent.toFixed(2) %>%</p>
+    <p><strong>Thickness:</strong> <%= thickness.toFixed(2) %>%</p>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Checker</title>
+    <link rel="stylesheet" href="company/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1>SmartLab</h1>
+                
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        
+        <h1>Quality Evaluation</h1>
+        <div id="evaluationData" class="evaluation-data">
+            <p><strong>Texture Evaluation:</strong> <%= textureevaluation.toFixed(2) %>%</p>
+            <p><strong>Oil Content:</strong> <%= oilcontent.toFixed(2) %>%</p>
+            <p><strong>Thickness:</strong> <%= thickness.toFixed(2) %>%</p>
+            
+            <% var qualityDecision = "Reject"; %>
+            <% if (textureevaluation>= 50 && oilcontent <= 50 && thickness<= 50) { %>
+                <% qualityDecision = "Approve"; %>
+            <% } %>
+
+            <p><strong>Quality Decision:</strong> <%= qualityDecision %></p>
+        </div>
+    </div>
+
+    
+    <!-- <script src="company/js/script.js"></script> -->
+</body>
+</html>
+
